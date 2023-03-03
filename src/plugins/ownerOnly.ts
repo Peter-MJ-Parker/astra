@@ -21,28 +21,28 @@
  * ```
  */
 
-import { CommandType, CommandControlPlugin, controller } from "@sern/handler";
-import { env } from "#utils";
+import { CommandType, CommandControlPlugin, controller } from '@sern/handler';
+import { env } from '#utils';
 export function ownerOnly(owners?: string[]) {
 	return CommandControlPlugin<CommandType.Both>(async (ctx, args) => {
-		const config: string[] = env.ownerIDs;
+		const [config] = env.ownerIDs;
 		if (!owners) {
 			if (!config || config.length < 1) {
 				let app = await ctx.client.application?.fetch();
 				if (ctx.user.id === app?.owner?.id) {
 					switch (args[0]) {
-						case "slash":
+						case 'slash':
 							await ctx.interaction.reply({
 								content:
-									"Make sure your ID is set in environemnt!",
+									'Make sure your ID is set in environemnt!',
 								ephemeral: true,
 							});
 							break;
-						case "text":
+						case 'text':
 							ctx.message
 								.reply({
 									content:
-										"Make sure your ID is set in environemnt!",
+										'Make sure your ID is set in environemnt!',
 								})
 								.then((m) => {
 									setTimeout(async () => {
@@ -61,9 +61,10 @@ export function ownerOnly(owners?: string[]) {
 
 				return controller.stop(); //! Important: It stops the execution of command!
 			} else owners = config;
+			console.log(owners);
 		}
 		if (owners && owners.includes(ctx.user.id)) return controller.next();
-		await ctx.reply("Only owner can run it!!!");
+		await ctx.reply('Only owner can run it!!!');
 		return controller.stop(); //! Important: It stops the execution of command!
 	});
 }
