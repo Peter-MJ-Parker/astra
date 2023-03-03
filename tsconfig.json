@@ -27,7 +27,8 @@
 			"#presence": ["src/tools/status"],
 			"#music": ["src/Structures/player/index"],
 			"#handler": ["src/Structures/handler/index"],
-			"#gamecord": ["src/Structures/gaming/GameCord"]
+			"#gamecord": ["src/Structures/gaming/GameCord"],
+			"#schemas/*": ["src/Structures/mongo/schemas/*"]
 		}
 	}
 }

@@ -1,82 +1,83 @@
 {
-  "name": "astra",
-  "version": "1.0.0",
-  "description": "Discord bot that plays music and keeps up with game details.",
-  "main": "dist/Astra.js",
-  "type": "module",
-  "scripts": {
-    "build": "tsc",
-    "start": "tsc && node ./dist/Astra.js",
-    "dev": "tsc && nodemon ./dist/Astra.js",
-    "pm2": "tsc -w && pm2 start ./dist/Astra.js --name Astra",
-    "pm2-restart": "tsc && pm2 restart Astra",
-    "google": "node ./dist/Structures/client/google.js"
-  },
-  "keywords": [
-    "typescript",
-    "sern",
-    "discord.js",
-    "music",
-    "gaming",
-    "api",
-    "xp",
-    "rank",
-    "level"
-  ],
-  "license": "UNLICENSED",
-  "dependencies": {
-    "@distube/deezer": "^1.0.0",
-    "@distube/soundcloud": "^1.3.0",
-    "@distube/spotify": "^1.5.1",
-    "@distube/yt-dlp": "^1.1.3",
-    "@google-cloud/translate": "^7.2.0",
-    "@sern/handler": "^2.5.3",
-    "@spark.ts/logger": "^1.4.0",
-    "axios": "^1.3.3",
-    "canvas": "^2.11.0",
-    "colorette": "^2.0.19",
-    "discord-gamecord": "^4.2.0",
-    "discord-html-transcripts": "^3.1.3",
-    "discord-minimal": "^0.1.55",
-    "discord.js": "^14.7.1",
-    "distube": "^4.0.4",
-    "glob": "^8.1.0",
-    "mongoose": "^6.9.2",
-    "twitter": "^1.7.1",
-    "twitter-api-v2": "^1.14.1",
-    "undici": "^5.20.0"
-  },
-  "devDependencies": {
-    "@types/glob": "^8.0.1",
-    "@types/node": "^18.13.0",
-    "@types/node-fetch": "^2.6.2",
-    "nodemon": "^2.0.20",
-    "typescript": "^4.9.5"
-  },
-  "imports": {
-    "#client": [
-      "./dist/Structures/client/index.js"
-    ],
-    "#utils": [
-      "./dist/Structures/client/utils.js"
-    ],
-    "#Astra": [
-      "./dist/Astra.js"
-    ],
-    "#logger": [
-      "./dist/Structures/handler/sparky.js"
-    ],
-    "#presence": [
-      "./dist/tools/status.js"
-    ],
-    "#music": [
-      "./dist/Structures/player/index.js"
-    ],
-    "#handler": [
-      "./dist/Structures/handler/index.js"
-    ],
-    "#gamecord": [
-      "./dist/Structures/gaming/GameCord.js"
-    ]
-  }
+	"name": "astra",
+	"version": "1.0.0",
+	"description": "Discord bot that plays music and keeps up with game details.",
+	"main": "dist/Astra.js",
+	"type": "module",
+	"scripts": {
+		"build": "tsc",
+		"watch": "tsc -w",
+		"start": "tsc && node ./dist/Astra.js",
+		"dev": "tsc && nodemon ./dist/Astra.js",
+		"pm2": "pm2 start Astra --watch",
+		"pm2-restart": "tsc && pm2 restart Astra"
+	},
+	"keywords": [
+		"typescript",
+		"sern",
+		"discord.js",
+		"music",
+		"gaming",
+		"api",
+		"xp",
+		"rank",
+		"level"
+	],
+	"license": "UNLICENSED",
+	"dependencies": {
+		"@distube/deezer": "^1.0.0",
+		"@distube/soundcloud": "^1.3.0",
+		"@distube/spotify": "^1.5.1",
+		"@distube/yt-dlp": "^1.1.3",
+		"@google-cloud/translate": "^7.2.0",
+		"@sern/handler": "^2.5.3",
+		"@spark.ts/logger": "^1.4.0",
+		"axios": "^1.3.4",
+		"canvas": "^2.11.0",
+		"colorette": "^2.0.19",
+		"discord-html-transcripts": "^3.1.3",
+		"discord.js": "^14.7.1",
+		"distube": "^4.0.4",
+		"glob": "^9.2.1",
+		"mongoose": "^7.0.0",
+		"twitter": "^1.7.1",
+		"twitter-api-v2": "^1.14.2",
+		"undici": "^5.20.0"
+	},
+	"devDependencies": {
+		"@types/glob": "^8.0.1",
+		"@types/node": "^18.13.0",
+		"@types/node-fetch": "^2.6.2",
+		"nodemon": "^2.0.20",
+		"typescript": "^4.9.5"
+	},
+	"imports": {
+		"#client": [
+			"./dist/Structures/client/index.js"
+		],
+		"#utils": [
+			"./dist/Structures/client/utils.js"
+		],
+		"#Astra": [
+			"./dist/Astra.js"
+		],
+		"#logger": [
+			"./dist/Structures/handler/sparky.js"
+		],
+		"#presence": [
+			"./dist/tools/status.js"
+		],
+		"#music": [
+			"./dist/Structures/player/index.js"
+		],
+		"#handler": [
+			"./dist/Structures/handler/index.js"
+		],
+		"#gamecord": [
+			"./dist/Structures/gaming/GameCord.js"
+		],
+		"#schemas/*": [
+			"./dist/Structures/mongo/schemas/*.js"
+		]
+	}
 }
