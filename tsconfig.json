@@ -24,7 +24,6 @@
 			"#utils": ["src/Structures/client/utils"],
 			"#Astra": ["src/Astra"],
 			"#logger": ["src/Structures/handler/sparky"],
-			"#presence": ["src/tools/status"],
 			"#music": ["src/Structures/player/index"],
 			"#handler": ["src/Structures/handler/index"],
 			"#gamecord": ["src/Structures/gaming/GameCord"],

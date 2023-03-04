@@ -64,9 +64,6 @@
 		"#logger": [
 			"./dist/Structures/handler/sparky.js"
 		],
-		"#presence": [
-			"./dist/tools/status.js"
-		],
 		"#music": [
 			"./dist/Structures/player/index.js"
 		],
