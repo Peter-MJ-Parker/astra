@@ -1,23 +1,27 @@
-import type { Client, ClientPresenceStatus } from "discord.js";
+import type { Client, ClientPresenceStatus } from 'discord.js';
 
 export function presences(client: Client) {
-	const gCount = client.guilds?.cache.size.toString();
+	const gCount = client.guilds?.cache.size;
 	const uCount = client.users.cache.filter((m) => !m.bot).size;
+	let newName: string = '';
+	if (gCount < 2) {
+		newName += `over ${gCount} guild.`;
+	} else newName = `over ${gCount} guilds.`;
 	let acts = [
 		{
-			name: `over ${gCount} guild(s).`,
+			name: newName,
 			type: 3,
-			status: "online",
+			status: 'online',
 		},
 		{
-			name: "/commands",
+			name: '/commands',
 			type: 5,
-			status: "dnd",
+			status: 'dnd',
 		},
 		{
 			name: `over ${uCount} user(s).`,
 			type: 3,
-			status: "online",
+			status: 'online',
 		},
 	];
 	setInterval(async () => {
