@@ -17,19 +17,19 @@
  * })
  * ```
  */
-import { useContainer } from "#Astra";
+import { useContainer } from '#Astra';
 import {
 	CommandInitPlugin,
 	CommandType,
 	controller,
 	SernOptionsData,
 	SlashCommand,
-} from "@sern/handler";
+} from '@sern/handler';
 import {
 	ApplicationCommandData,
 	ApplicationCommandType,
 	PermissionResolvable,
-} from "discord.js";
+} from 'discord.js';
 
 export const CommandTypeRaw = {
 	[CommandType.Both]: ApplicationCommandType.ChatInput,
@@ -47,7 +47,7 @@ export function publish<
 >(options?: PublishOptions) {
 	return CommandInitPlugin<T>(async ({ module }) => {
 		// Users need to provide their own useContainer function.
-		const [client] = useContainer("@sern/client");
+		const [client] = useContainer('@sern/client');
 		const defaultOptions = {
 			guildIds: [],
 			dmPermission: false,
@@ -60,7 +60,7 @@ export function publish<
 			options as unknown as ValidPublishOptions;
 
 		function c(e: unknown) {
-			console.error("publish command didnt work for", module.name);
+			console.error('publish command didnt work for', module.name);
 			console.error(e);
 		}
 
@@ -86,7 +86,7 @@ export function publish<
 			return {
 				name: module.name,
 				type: curAppType,
-				description: cmd(module.description, ""),
+				description: cmd(module.description, ''),
 				options: cmd(
 					optionsTransformer((module as SlashCommand).options ?? []),
 					[]
@@ -105,20 +105,16 @@ export function publish<
 				);
 				if (cmd) {
 					if (!cmd.equals(commandData, true)) {
-						logged(
-							`Found differences in global command ${module.name}`
-						);
-						cmd.edit(commandData).then(
-							log(
-								`${module.name} updated with new data successfully!`
-							)
-						);
+						logged(`Found differences in global command ${module.name}`);
+						cmd
+							.edit(commandData)
+							.then(log(`${module.name} updated with new data successfully!`));
 					}
 					return controller.next();
 				}
 				client
 					.application!.commands.create(commandData)
-					.then(log("Command created", module.name))
+					.then(log('Command created', module.name))
 					.catch(c);
 				return controller.next();
 			}
@@ -134,11 +130,7 @@ export function publish<
 						logged(`Found differences in command ${module.name}`);
 						guildCmd
 							.edit(commandData)
-							.then(
-								log(
-									`${module.name} updated with new data successfully!`
-								)
-							)
+							.then(log(`${module.name} updated with new data successfully!`))
 							.catch(c);
 						continue;
 					}
@@ -146,12 +138,12 @@ export function publish<
 				}
 				guild.commands
 					.create(commandData)
-					.then(log("Guild Command created", module.name, guild.name))
+					.then(log('Guild Command created', module.name, guild.name))
 					.catch(c);
 			}
 			return controller.next();
 		} catch (e) {
-			logged("Command did not register" + module.name);
+			logged('Command did not register' + module.name);
 			logged(e);
 			return controller.stop();
 		}
@@ -188,9 +180,9 @@ type BasePublishOptions = GuildPublishOptions | GlobalPublishOptions;
 
 export type PublishOptions = BasePublishOptions &
 	(
-		| Required<Pick<BasePublishOptions, "defaultMemberPermissions">>
+		| Required<Pick<BasePublishOptions, 'defaultMemberPermissions'>>
 		| (
-				| Required<Pick<BasePublishOptions, "dmPermission">>
-				| Required<Pick<BasePublishOptions, "guildIds">>
+				| Required<Pick<BasePublishOptions, 'dmPermission'>>
+				| Required<Pick<BasePublishOptions, 'guildIds'>>
 		  )
 	);

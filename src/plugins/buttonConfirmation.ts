@@ -19,22 +19,22 @@
  * ```
  */
 
-import { CommandControlPlugin, CommandType, controller } from "@sern/handler";
+import { CommandControlPlugin, CommandType, controller } from '@sern/handler';
 import {
 	ActionRowBuilder,
 	ButtonBuilder,
 	ButtonStyle,
 	ComponentType,
-} from "discord.js";
+} from 'discord.js';
 
 export function confirm(options?: Partial<ConfirmationOptions>) {
 	return CommandControlPlugin<CommandType.Both>(async (ctx, args) => {
 		options = {
-			content: "Do you want to proceed?",
-			denialMessage: "Cancelled",
-			labels: ["No", "Yes"],
+			content: 'Do you want to proceed?',
+			denialMessage: 'Cancelled',
+			labels: ['No', 'Yes'],
 			time: 60_000,
-			wrongUserResponse: "Not for you!",
+			wrongUserResponse: `Don't be ignorant. These buttons are for ${ctx.user.tag}`,
 			...options,
 		};
 
@@ -58,7 +58,7 @@ export function confirm(options?: Partial<ConfirmationOptions>) {
 		});
 
 		return new Promise((resolve) => {
-			collector.on("collect", async (i) => {
+			collector.on('collect', async (i) => {
 				await i.update({ components: [] });
 				collector.stop();
 				if (i.customId === options!.labels![1]) {
@@ -71,19 +71,17 @@ export function confirm(options?: Partial<ConfirmationOptions>) {
 				resolve(controller.stop());
 			});
 
-			collector.on("end", async (c) => {
+			collector.on('end', async (c) => {
 				if (c.size) return;
 				buttons.forEach((b) => b.setDisabled());
 				await sent.edit({
 					components: [
-						new ActionRowBuilder<ButtonBuilder>().setComponents(
-							buttons
-						),
+						new ActionRowBuilder<ButtonBuilder>().setComponents(buttons),
 					],
 				});
 			});
 
-			collector.on("ignore", async (i) => {
+			collector.on('ignore', async (i) => {
 				await i.reply({
 					content: options?.wrongUserResponse,
 					ephemeral: true,

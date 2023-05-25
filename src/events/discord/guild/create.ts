@@ -1,22 +1,24 @@
-import { EventType, eventModule } from "@sern/handler";
-import { Events, Guild } from "discord.js";
-import guildSchema from "../../../Structures/mongo/schemas/guild.js";
+import { EventType, eventModule } from '@sern/handler';
+import { Events, Guild } from 'discord.js';
+import guildSchema from '#schemas/guild';
 
 export default eventModule({
 	type: EventType.Discord,
 	name: Events.GuildCreate,
 	async execute(guild: Guild) {
-		if (await guildSchema.exists({ guildId: guild.id })) {
-			await guildSchema.deleteOne({ guildId: guild.id });
+		let Guild = await guildSchema.findOne({ guildId: guild.id });
+
+		if (!Guild) {
 			await new guildSchema({
-				guildId: guild.id,
 				name: guild.name,
+				guildId: guild.id,
 			}).save();
 		} else {
-			await new guildSchema({
-				guildId: guild.id,
-				name: guild.name,
-			}).save();
+			return guildSchema;
+		}
+
+		if (guild.id === '678398938046267402') {
+			await guild.members.me?.setNickname("Smokin' Weed");
 		}
 	},
 });

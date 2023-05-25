@@ -1,8 +1,7 @@
-import { EventType, eventModule } from "@sern/handler";
-import { Events } from "discord.js";
+import { EventType, discordEvent, eventModule } from '@sern/handler';
+import { Events, MessageReaction, User } from 'discord.js';
 
-export default eventModule({
-  type: EventType.Discord,
-  name: Events.MessageReactionRemove,
-  async execute() {},
+export default discordEvent({
+	name: Events.MessageReactionRemove,
+	async execute(reaction, user) {},
 });

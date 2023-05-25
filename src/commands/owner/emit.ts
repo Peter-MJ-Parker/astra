@@ -1,45 +1,44 @@
-import { client } from "#Astra";
-import { ownerOnly, publish } from "#handler";
-import { eventCapitalise } from "#utils";
-import { commandModule, CommandType } from "@sern/handler";
+import { client } from '#Astra';
+import { ownerOnly, publish } from '#plugins';
+import { eventCapitalise } from '#utils';
+import { commandModule, CommandType } from '@sern/handler';
 import {
 	ApplicationCommandOptionType,
 	EmbedBuilder,
 	GuildMember,
-} from "discord.js";
+} from 'discord.js';
 
 export default commandModule({
 	type: CommandType.Slash,
 	plugins: [publish(), ownerOnly()],
-	description: "Emits client events for testing purposes.",
+	description: 'Emits client events for testing purposes.',
 	options: [
 		{
-			name: "event",
-			description: "Event name to emit/test",
+			name: 'event',
+			description: 'Event name to emit/test',
 			type: ApplicationCommandOptionType.String,
 			choices: [
-				{ name: "guildMemberAdd", value: "guildMemberAdd" },
-				{ name: "guildMemberRemove", value: "guildMemberRemove" },
+				{ name: 'guildMemberAdd', value: 'guildMemberAdd' },
+				{ name: 'guildMemberRemove', value: 'guildMemberRemove' },
 				// { name: "guildMemberUpdate", value: "guildMemberUpdate" },
 				// { name: "guildCreate", value: "guildCreate" },
 				// { name: "guildDelete", value: "guildDelete" },
 				// { name: "emojiCreate", value: "emojiCreate" },
 				// { name: "emojiDelete", value: "emojiDelete" },
-				// { name: "emojiUpdate", value: "emojiUpdate" },
 			],
 			required: true,
 		},
 		{
-			name: "user",
-			description: "Select a user to emit the event on.",
+			name: 'user',
+			description: 'Select a user to emit the event on.',
 			type: ApplicationCommandOptionType.User,
 			required: true,
 		},
 	],
 	execute: async ({ interaction }, [, options]) => {
 		try {
-			const event = options.getString("event", true)!;
-			const user = options.getUser("user")?.id!;
+			const event = options.getString('event', true)!;
+			const user = options.getUser('user')?.id!;
 			const message = `Event: ***${eventCapitalise(
 				event
 			)}*** has been triggered!`;
@@ -49,11 +48,11 @@ export default commandModule({
 			});
 			let member: GuildMember;
 			switch (event) {
-				case "guildMemberAdd":
+				case 'guildMemberAdd':
 					member = interaction.guild?.members.cache.get(user)!;
 					client.emit(event, member);
 					break;
-				case "guildMemberRemove":
+				case 'guildMemberRemove':
 					member = interaction.guild?.members.cache.get(user)!;
 					client.emit(event, member);
 					break;

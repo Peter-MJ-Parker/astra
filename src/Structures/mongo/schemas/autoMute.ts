@@ -1,13 +1,14 @@
-import { model, Schema } from "mongoose";
+import pkg from 'mongoose';
 import {
 	nonReqBoolean,
 	nonReqString,
 	reqBoolean,
 	reqNumber,
 	reqString,
-} from "#handler";
+} from '#handler';
+const { model, Schema } = pkg;
 
-const name = "autoMute";
+const name = 'autoMute';
 export default model(
 	name,
 	new Schema({

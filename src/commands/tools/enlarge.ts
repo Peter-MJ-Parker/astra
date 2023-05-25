@@ -1,4 +1,4 @@
-import { publish } from '#handler';
+import { publish } from '#plugins';
 import { commandModule, CommandType } from '@sern/handler';
 
 export default commandModule({

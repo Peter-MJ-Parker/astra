@@ -22,8 +22,8 @@ import {
 	CommandType,
 	Context,
 	controller,
-} from "@sern/handler";
-import { GuildMember } from "discord.js";
+} from '@sern/handler';
+import { GuildMember } from 'discord.js';
 /**
  * actions/seconds
  */
@@ -34,9 +34,9 @@ export interface Cooldown {
 	actions: number;
 }
 export enum CooldownLocation {
-	channel = "channel",
-	user = "user",
-	guild = "guild",
+	channel = 'channel',
+	user = 'user',
+	guild = 'guild',
 }
 
 export class ExpiryMap<K, V> extends Map<K, V> {
@@ -65,7 +65,7 @@ function parseCooldown(
 	location: CooldownLocation,
 	cooldown: CooldownString
 ): Cooldown {
-	const [actions, seconds] = cooldown.split("/").map((s) => Number(s));
+	const [actions, seconds] = cooldown.split('/').map((s) => Number(s));
 
 	if (
 		!Number.isSafeInteger(actions) ||
@@ -89,7 +89,7 @@ function getPropertyForLocation(context: Context, location: CooldownLocation) {
 			return context.channel!.id;
 		case CooldownLocation.user:
 			if (!context.member || !(context.member instanceof GuildMember)) {
-				throw new Error("context.member is not a GuildMember");
+				throw new Error('context.member is not a GuildMember');
 			}
 			return context.member.id;
 		case CooldownLocation.guild:

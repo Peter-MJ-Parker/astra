@@ -17,8 +17,8 @@
  * })
  * ```
  */
-import { ChannelType } from "discord.js";
-import { CommandControlPlugin, CommandType, controller } from "@sern/handler";
+import { ChannelType } from 'discord.js';
+import { CommandControlPlugin, CommandType, controller } from '@sern/handler';
 export function channelType(channelType: ChannelType[], onFail?: string) {
 	return CommandControlPlugin<CommandType.Both>(async (ctx, args) => {
 		let channel = ctx.channel?.type;

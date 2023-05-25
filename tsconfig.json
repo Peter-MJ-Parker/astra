@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"checkJs": false,
 		"resolveJsonModule": true,
 		"moduleResolution": "node",
 		"target": "ESNext",
@@ -11,7 +12,6 @@
 		"esModuleInterop": true,
 		"noImplicitAny": true,
 		"strictNullChecks": true,
-		"importsNotUsedAsValues": "error",
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
 		"allowJs": true,
@@ -19,14 +19,14 @@
 		"allowUnusedLabels": true,
 		"alwaysStrict": true,
 		"exactOptionalPropertyTypes": true,
+		"pretty": true,
 		"paths": {
 			"#client": ["src/Structures/client/index"],
 			"#utils": ["src/Structures/client/utils"],
 			"#Astra": ["src/Astra"],
 			"#logger": ["src/Structures/handler/sparky"],
-			"#music": ["src/Structures/player/index"],
 			"#handler": ["src/Structures/handler/index"],
-			"#gamecord": ["src/Structures/gaming/GameCord"],
+			"#plugins": ["src/Structures/handler/plugins"],
 			"#schemas/*": ["src/Structures/mongo/schemas/*"]
 		}
 	}

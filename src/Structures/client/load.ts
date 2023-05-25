@@ -1,26 +1,24 @@
-import { existsSync, readFileSync } from "fs";
+import { existsSync, readFileSync } from 'fs';
 export function load<T extends object>(
 	struct: Struct<T>,
-	path: string = ".env",
+	path: string = '.env',
 	inject: boolean = true
 ): T {
 	const out: T = {} as never;
 
 	if (!existsSync(path)) {
-		throw new Error(
-			`Cannot read contents of '${path}': File does not exist`
-		);
+		throw new Error(`Cannot read contents of '${path}': File does not exist`);
 	}
 
 	const file = readFileSync(path);
-	const lines = file.toString().split("\n");
+	const lines = file.toString().split('\n');
 
 	const raw: Record<string, string> = {};
 
 	for (const line of lines) {
 		const [key, value] = [
-			line.split("=")[0],
-			line.split("=").slice(1).join("="),
+			line.split('=')[0],
+			line.split('=').slice(1).join('='),
 		] as [string, string];
 
 		let real_value = value;

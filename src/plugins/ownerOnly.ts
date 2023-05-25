@@ -33,16 +33,14 @@ export function ownerOnly(owners?: string[]) {
 					switch (args[0]) {
 						case 'slash':
 							await ctx.interaction.reply({
-								content:
-									'Make sure your ID is set in environemnt!',
+								content: 'Make sure your ID is set in environemnt!',
 								ephemeral: true,
 							});
 							break;
 						case 'text':
 							ctx.message
 								.reply({
-									content:
-										'Make sure your ID is set in environemnt!',
+									content: 'Make sure your ID is set in environemnt!',
 								})
 								.then((m) => {
 									setTimeout(async () => {
@@ -54,14 +52,11 @@ export function ownerOnly(owners?: string[]) {
 						default:
 							break;
 					}
-					throw new Error(
-						`Please set your ownerIDs in your env/config file.`
-					);
+					throw new Error(`Please set your ownerIDs in your env/config file.`);
 				}
 
 				return controller.stop(); //! Important: It stops the execution of command!
 			} else owners = config;
-			console.log(owners);
 		}
 		if (owners && owners.includes(ctx.user.id)) return controller.next();
 		await ctx.reply('Only owner can run it!!!');

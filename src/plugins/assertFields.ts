@@ -26,8 +26,8 @@
  * })
  * ```
  */
-import { CommandControlPlugin, CommandType, controller } from "@sern/handler";
-import type { ModalSubmitInteraction } from "discord.js";
+import { CommandControlPlugin, CommandType, controller } from '@sern/handler';
+import type { ModalSubmitInteraction } from 'discord.js';
 
 type Assertion = RegExp | ((value: string) => boolean);
 
@@ -48,9 +48,7 @@ export function assertFields(config: {
 					: assertion;
 			if (!resolvedAssertion(input)) {
 				errors.push(
-					input +
-						" failed to pass assertion " +
-						resolvedAssertion.toString()
+					input + ' failed to pass assertion ' + resolvedAssertion.toString()
 				);
 			}
 		}

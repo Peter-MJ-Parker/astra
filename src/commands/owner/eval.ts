@@ -1,38 +1,38 @@
-import { commandModule, CommandType } from "@sern/handler";
-import { EmbedBuilder, TextChannel } from "discord.js";
-import { inspect } from "util";
-import { ownerOnly } from "#handler";
-import { env } from "#utils";
+import { commandModule, CommandType } from '@sern/handler';
+import { EmbedBuilder, TextChannel } from 'discord.js';
+import { inspect } from 'util';
+import { ownerOnly } from '#plugins';
+import { env } from '#utils';
 
 /**
- * This command is from sern-community with a few modifications and I take no credit for it.
+ * This command is from sern-community bot with a few modifications and I take no credit for it.
  */
 
 export default commandModule({
 	type: CommandType.Text,
-	description: "Eval something",
+	description: 'Eval something',
 	plugins: [ownerOnly()],
-	alias: ["ev"],
+	alias: ['ev'],
 	execute: async (ctx, args) => {
 		let code: string[] | string = args[1];
 
-		code = code.join(" ") as string;
-		if (code.includes("await")) {
-			const ar = code.split(";");
+		code = code.join(' ') as string;
+		if (code.includes('await')) {
+			const ar = code.split(';');
 			const last = ar.pop();
-			code = `(async () => {\n${ar.join(";\n")}\nreturn ${
-				last?.trim() ?? " "
+			code = `(async () => {\n${ar.join(';\n')}\nreturn ${
+				last?.trim() ?? ' '
 			}\n\n})();`;
 		}
 		let { channel, guild, client, user, member, message: msg } = ctx;
 		channel = channel as TextChannel;
 		if (
-			["TOKEN", "process.env", "token", "env", "client"].some((e) =>
+			['TOKEN', 'process.env', 'token', 'env', 'client'].some((e) =>
 				code.includes(e)
 			) &&
-			ctx.user.id !== "1017182455926624316"
+			ctx.user.id !== env.ownerIDs[0]
 		)
-			return ctx.message.react("❌");
+			return ctx.message.react('❌');
 
 		let result: unknown | string;
 
@@ -43,16 +43,16 @@ export default commandModule({
 		}
 		if (result instanceof Promise)
 			result = await result.catch((e: Error) => new Error(e.message));
-		if (typeof result !== "string") {
+		if (typeof result !== 'string') {
 			result = inspect(result, {
 				depth: 0,
 			});
 		}
 
-		result = "```js\n" + result + "\n```";
+		result = '```js\n' + result + '\n```';
 
 		if ((result as string).length > 2000) {
-			channel!.send("Result is too long to send");
+			channel!.send('Result is too long to send');
 		}
 
 		channel!.send({ content: result as string });
@@ -62,21 +62,21 @@ export default commandModule({
 			if (!channel) return;
 			const embed = new EmbedBuilder()
 				.setColor(0xcc5279)
-				.setTitle("v2 is out!")
-				.setThumbnail(client.user?.displayAvatarURL() ?? "")
+				.setTitle('v2 is out!')
+				.setThumbnail(client.user?.displayAvatarURL() ?? '')
 				.setImage(
-					"https://raw.githubusercontent.com/sern-handler/.github/main/banner.png"
+					'https://raw.githubusercontent.com/sern-handler/.github/main/banner.png'
 				)
-				.setAuthor({ name: "sern", url: "https://sern.dev/" })
+				.setAuthor({ name: 'sern', url: 'https://sern.dev/' })
 				.setDescription(
 					`__**Quick Look:**__\n\n${text()}\n\nThank you all for being patient!`
 				)
-				.setFooter({ text: "Supports DJS v14.2 and above" })
+				.setFooter({ text: 'Supports DJS v14.2 and above' })
 				.setTimestamp();
-			const content = ping ? "@everyone" : "";
+			const content = ping ? '@everyone' : '';
 			channel.isTextBased() &&
 				channel.send({ content: `${content}`, embeds: [embed] });
-			return "Done sir";
+			return 'Done sir';
 		}
 	},
 });
@@ -100,5 +100,6 @@ function text() {
 			value: `\` - \` Documentation at your hands in this server!\n\` - \` Autocompletes\n\` - \` Tag System\n\` - \` Features all the plugins in [this repository](https://github.com/sern-handler/awesome-plugins)`,
 		},
 	];
-	return obj.map(({ name, value }) => `**${name}**\n${value}`).join("\n\n");
+	return obj.map(({ name, value }) => `**${name}**\n${value}`).join('\n\n');
 }
+

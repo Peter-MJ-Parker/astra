@@ -1,6 +1,11 @@
-import type { Client, ClientPresenceStatus } from 'discord.js';
+import type { Client, ClientPresenceStatus, User } from 'discord.js';
 
-export function presences(client: Client) {
+export async function presences(client: Client) {
+	const owner = await client.users.fetch(
+		(
+			await client.application!.fetch()
+		).owner as User
+	);
 	const gCount = client.guilds?.cache.size;
 	const uCount = client.users.cache.filter((m) => !m.bot).size;
 	let newName: string = '';
@@ -8,6 +13,16 @@ export function presences(client: Client) {
 		newName += `over ${gCount} guild.`;
 	} else newName = `over ${gCount} guilds.`;
 	let acts = [
+		{
+			name: 'sern bots',
+			type: 3,
+			status: 'online',
+		},
+		{
+			name: `${owner.tag}`,
+			type: 2,
+			status: 'listening',
+		},
 		{
 			name: newName,
 			type: 3,
@@ -36,5 +51,5 @@ export function presences(client: Client) {
 			status: currentAct.status as ClientPresenceStatus,
 		});
 		acts.push(currentAct);
-	}, 15000);
+	}, 60000);
 }

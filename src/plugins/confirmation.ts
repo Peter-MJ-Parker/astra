@@ -25,8 +25,8 @@ import {
 	CommandType,
 	Context,
 	controller,
-} from "@sern/handler";
-import type { Awaitable, Message, MessageReaction, User } from "discord.js";
+} from '@sern/handler';
+import type { Awaitable, Message, MessageReaction, User } from 'discord.js';
 
 type Callback<T> = Awaitable<T> | ((context: Context) => Awaitable<T>);
 type PostCallback<T> =
@@ -49,34 +49,34 @@ interface Emojis {
 
 const defaultOptions: ConfirmationOptions = {
 	timeout: 5000,
-	message: "Are you sure you want to proceed?",
-	onTimeout: "confirmation timed out",
-	onCancel: "confirmation cancelled",
+	message: 'Are you sure you want to proceed?',
+	onTimeout: 'confirmation timed out',
+	onCancel: 'confirmation cancelled',
 	onConfirm: (_, result) => {
 		try {
 			result.delete();
 		} catch (e) {}
 	},
 	emojis: {
-		no: "❌",
-		yes: "✅",
+		no: '❌',
+		yes: '✅',
 	},
 };
 
 export function confirmation(raw: Partial<ConfirmationOptions> = {}) {
 	const options: ConfirmationOptions = Object.assign({}, defaultOptions, raw);
 	return CommandControlPlugin<CommandType.Both>(async (context, _) => {
-		if (typeof options.message === "function") {
+		if (typeof options.message === 'function') {
 			options.message = await options.message(context);
 		}
 
 		const response = await context.reply(await options.message);
 		let { yes, no } = options.emojis;
-		if (typeof yes === "function") {
+		if (typeof yes === 'function') {
 			yes = await yes(context);
 		}
 
-		if (typeof no === "function") {
+		if (typeof no === 'function') {
 			no = await no(context);
 		}
 
@@ -97,7 +97,7 @@ export function confirmation(raw: Partial<ConfirmationOptions> = {}) {
 			time: options.timeout,
 		});
 		if (recieved.size === 0) {
-			if (typeof options.onTimeout === "function") {
+			if (typeof options.onTimeout === 'function') {
 				await options.onTimeout(context, response);
 			} else {
 				await response.edit(await options.onTimeout);
@@ -112,7 +112,7 @@ export function confirmation(raw: Partial<ConfirmationOptions> = {}) {
 
 		switch (reaction.emoji.name) {
 			case await yes:
-				if (typeof options.onConfirm === "function") {
+				if (typeof options.onConfirm === 'function') {
 					await options.onConfirm(context, response);
 				} else {
 					await response.edit(await options.onConfirm);
@@ -121,7 +121,7 @@ export function confirmation(raw: Partial<ConfirmationOptions> = {}) {
 
 				return controller.next();
 			case await no:
-				if (typeof options.onCancel === "function") {
+				if (typeof options.onCancel === 'function') {
 					await options.onCancel(context, response);
 				} else {
 					await response.edit(await options.onCancel);

@@ -3,3 +3,4 @@
 .env
 src/Structures/google/google-config.json
 .vscode/mongoschema.ts.code-snippets
+.vscode/settings.json

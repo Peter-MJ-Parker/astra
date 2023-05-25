@@ -1,10 +1,10 @@
-import { useContainer } from "#Astra";
-import { env } from "#utils";
-import mongoose from "mongoose";
+import { useContainer } from '#Astra';
+import { env } from '#utils';
+import mongoose from 'mongoose';
 const { connect, set } = mongoose;
 
 export async function mongoConnect(url?: string) {
-	useContainer("mongoose");
+	useContainer('mongoose');
 	const dbOptions = {
 		keepAlive: true,
 		keepAliveInitialDelay: 300000,
@@ -13,7 +13,7 @@ export async function mongoConnect(url?: string) {
 		family: 4,
 	};
 
-	set("strictQuery", true);
+	set('strictQuery', true);
 	await connect(url ? url : env.CONNECT!, dbOptions);
 }
 
@@ -24,7 +24,7 @@ export const reqString = {
 
 export const nonReqString = {
 	type: String,
-	default: "",
+	default: '',
 	required: false,
 };
 

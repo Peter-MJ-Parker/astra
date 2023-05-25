@@ -1,6 +1,6 @@
-import { autoMute, badLinks } from "#utils";
-import { EventType, eventModule } from "@sern/handler";
-import { Events, Message } from "discord.js";
+import { autoMute, badLinks } from '#utils';
+import { EventType, eventModule } from '@sern/handler';
+import { Events, Message } from 'discord.js';
 
 export default eventModule({
 	type: EventType.Discord,
@@ -11,8 +11,8 @@ export default eventModule({
 		if (badLinks.some((word) => message.content.includes(word))) {
 			await autoMute(
 				message.author.id,
-				message.guildId,
-				"Bad Link Usage",
+				message.guildId!,
+				'Bad Link Usage',
 				message
 			);
 			await message.delete();

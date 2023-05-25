@@ -1,11 +1,11 @@
-import { model, Schema } from "mongoose";
-import { nonReqBoolean, nonReqString, reqString } from "../properties.js";
+import mongoose from 'mongoose';
+import { nonReqBoolean, nonReqString, reqString } from '../properties.js';
+const { model, Schema } = mongoose;
 
-const name = "welcomeSetup";
+const name = 'welcomeSetup';
 export default model(
 	name,
 	new Schema({
-		_id: Schema.Types.ObjectId,
 		guildId: reqString,
 		reaction: nonReqBoolean,
 		canvas: {

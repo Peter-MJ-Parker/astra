@@ -21,8 +21,8 @@ import {
 	GuildTextBasedChannel,
 	TextBasedChannel,
 	TextChannel,
-} from "discord.js";
-import { CommandControlPlugin, CommandType, controller } from "@sern/handler";
+} from 'discord.js';
+import { CommandControlPlugin, CommandType, controller } from '@sern/handler';
 function isGuildText(
 	channel: TextBasedChannel | null
 ): channel is GuildTextBasedChannel {

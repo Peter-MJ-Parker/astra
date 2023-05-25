@@ -1,8 +1,10 @@
-import { model, Schema } from "mongoose";
-import { nonReqBoolean, nonReqString, reqNumber, reqString } from "#handler";
+import mongoose from 'mongoose';
+import { nonReqBoolean, nonReqString, reqNumber, reqString } from '#handler';
+const { model, Schema } = mongoose;
 
+const name = 'rank';
 export default model(
-	"rank",
+	name,
 	new Schema({
 		guildId: reqString,
 		userId: reqString,
@@ -16,5 +18,5 @@ export default model(
 			},
 		],
 	}),
-	"rank"
+	name
 );

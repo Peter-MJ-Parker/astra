@@ -1,5 +1,5 @@
-import { EventType, eventModule } from "@sern/handler";
-import { AnyThreadChannel, Events } from "discord.js";
+import { EventType, eventModule } from '@sern/handler';
+import { type AnyThreadChannel, Events } from 'discord.js';
 
 export default eventModule({
 	type: EventType.Discord,

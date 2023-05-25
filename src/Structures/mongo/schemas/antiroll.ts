@@ -1,7 +1,8 @@
-import { model, Schema } from "mongoose";
-import { reqBoolean, reqNumber, reqString } from "#handler";
+import mongoose from 'mongoose';
+import { reqBoolean, reqNumber, reqString } from '#handler';
+const { model, Schema } = mongoose;
 
-const name = "antiroll";
+const name = 'antiroll';
 export default model(
 	name,
 	new Schema({

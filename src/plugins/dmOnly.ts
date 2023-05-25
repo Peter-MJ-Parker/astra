@@ -16,7 +16,7 @@
  * })
  * ```
  */
-import { CommandControlPlugin, CommandType, controller } from "@sern/handler";
+import { CommandControlPlugin, CommandType, controller } from '@sern/handler';
 export function dmOnly(content?: string, ephemeral?: boolean) {
 	//  For discord.js you should have the Partials.Channel and DirectMessages intent enabled.
 	return CommandControlPlugin<CommandType.Both>(async (ctx, _) => {
