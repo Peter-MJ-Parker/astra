@@ -11,4 +11,3 @@ export * from '../../plugins/permCheck.js';
 export * from '../../plugins/publish.js';
 export * from '../../plugins/requirePermission.js';
 export * from '../../plugins/serverOnly.js';
-export * from '../../plugins/playerPermCheck.js';

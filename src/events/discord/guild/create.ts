@@ -16,9 +16,5 @@ export default eventModule({
 		} else {
 			return guildSchema;
 		}
-
-		if (guild.id === '678398938046267402') {
-			await guild.members.me?.setNickname("Smokin' Weed");
-		}
 	},
 });
